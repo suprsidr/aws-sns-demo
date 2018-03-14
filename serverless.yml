@@ -26,8 +26,10 @@ functions:
 package:
   exclude:
     - .git/**
+    - .vscode/**
     - create-role/**
     - frontend/**
     - iot/**
+    - .gitignore
     - LICENSE
     - README.md

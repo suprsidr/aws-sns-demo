@@ -7,7 +7,7 @@ const IoT = {
   connect: (topic, iotEndpoint, region, accessKey, secretKey, sessionToken) => {
     iotTopic = topic;
 
-    client = awsIot.device({
+    client = new awsIot.device({
       region: region,
       protocol: 'wss',
       accessKeyId: accessKey,
@@ -74,7 +74,7 @@ $(document).ready(() => {
   });
 
   $('#btn-connect').on('click', () => {
-    const iotTopic = '/serverless/pubsub';
+    const iotTopic = '/flooring/dev/mqtt-client-64845';
 
     IoT.connect(
       iotTopic,
@@ -91,14 +91,14 @@ $(document).ready(() => {
 
   $('#btn-send').on('click', () => {
     const msg = $('#message').val();
-    IoT.send(msg);
+    IoT.send(JSON.stringify({ message: msg }));
     $('#message').val('');
   });
 
   $('#message').keypress(function(e) {
     if (e.which == 13) {
       const msg = $('#message').val();
-      IoT.send(msg);
+      IoT.send(JSON.stringify({ message: msg }));
       $('#message').val('');
       return false;
     }
